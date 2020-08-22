@@ -11,6 +11,7 @@
   "private": true,
   "scripts": {
     "start": "PORT=3031 docker-compose up",
+    "start-prebuilt": "PORT=3031 docker-compose -f docker-compose-prebuilt.yml up",
     "build": "PORT=3031 docker-compose up --build"
   },
   "workspaces": [
