@@ -1,6 +1,6 @@
 # Spicy.ai - Full Stack
 
-#### 🌶 Live demo: [https://spicy.pascalgiguere.dev]()
+#### &nbsp;🌶 Live demo: [https://spicy.pascalgiguere.dev](https://spicy.pascalgiguere.dev)
 
 ![Screenshot](screenshot.png)
 
