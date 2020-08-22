@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "3fda4941-fe80-4aed-9f4b-2f4cd5dcd693",
+		"name": "Spicy.ai",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "root",
+			"item": [
+				{
+					"name": "GET root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/property",
+			"item": [
+				{
+					"name": "FIND properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/property",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"property"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FIND properies in radius",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/property?geoJson={\"type\":\"Point\",\"coordinates\":[-80.0782213,26.8849731]}&distance=120000",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"property"
+							],
+							"query": [
+								{
+									"key": "geoJson",
+									"value": "{\"type\":\"Point\",\"coordinates\":[-80.0782213,26.8849731]}"
+								},
+								{
+									"key": "distance",
+									"value": "120000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET property",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/property/622088210a6f43fca2a1824e8610df03",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"property",
+								"622088210a6f43fca2a1824e8610df03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET property image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/property/622088210a6f43fca2a1824e8610df03/image?parcelOverlay=true&buildingOverlay=true&resolution=600&fileType=png",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"property",
+								"622088210a6f43fca2a1824e8610df03",
+								"image"
+							],
+							"query": [
+								{
+									"key": "parcelOverlay",
+									"value": "true"
+								},
+								{
+									"key": "buildingOverlay",
+									"value": "true"
+								},
+								{
+									"key": "resolution",
+									"value": "600"
+								},
+								{
+									"key": "fileType",
+									"value": "png"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bdc07990-a574-48ee-8a21-b2dc5a1c2013",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5c34c9b-139b-47c2-a923-ed55ff92ebb0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "5196759e-6997-4de5-8d69-87ca190a0e1a",
+			"key": "URL",
+			"value": "http://localhost:3030",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

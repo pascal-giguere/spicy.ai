@@ -1,44 +1,104 @@
-# Zesty.ai engineering test (back-end)
+# Spicy.ai - Full Stack
 
-## Assignment
+![Screenshot](screenshot.png)
 
-Your goal is to create a RESTful API in Python that can find and manipulate images and geographical data, using property data stored in a SQL database, and images stored in cloud storage.  The API should be packaged as a containerized service (Docker image).  A test property database and images are provided for you.
+This project is a fork of the [Zesty.ai engineering test](https://github.com/zestyai/engineering-test).
+It's a modified version of the [`backend-test` branch](https://github.com/pascal-giguere/spicy.ai/tree/backend-test)
+that incorporates features from the
+[Zesty.ai full-stack engineering test](https://github.com/zestyai/engineering-test-fs).
 
-There are several different options for features you can implement in the API.  You can pick whichever ones you think you can do best.  The goal is to do as many as you can complete in **4 hours**. 
+The back-end test assignment instructions can be found in [backend-assignment.md](backend-assignment.md).
+The full-stack test assignment instructions can be found in [fullstack-assignment.md](fullstack-assignment.md).
 
-Note that some features are more difficult than others, and you will be evaluated on more than just the number of features completed.  Quality is preferred over quantity.  Design, organize, and comment your code as you would a typical production project.  Be prepared to explain any decisions you made.  
+The README of the back-end test can be found in [backend-test.md](backend-test.md).
+
+## Implemented features (back-end)
+
+See the features previously implemented as part of the `backend-test` branch in [backend-test.md](backend-test.md).
+
+## Implemented features (front-end)
+
+- Search
+  - `/search`
+- Save for Later
+  - `/favorites`
+  - Implemented using local storage (no user authentication)
+- Freestyle
+  - Display all properties
+    - `/`
+  - Display fake property names and risk levels
+    - Pseudo-random, deterministic formulas based on property ID, so that the name and risk level are always the same
+      for a given property
+  - Cool logo
+    - Why not?
 
 ## Setup
-### Development environment requirements
 
-You will need to install [Docker](https://www.docker.com/products/docker-desktop) and [`docker-compose`](https://docs.docker.com/compose/install/) to run the example database.
+A single Express app is used to serve both the API and the static front-end files.
+As such, a single Docker image is used for both the back-end and front-end.
 
-Your code should be in Python 3.x.  If you want to run/test your project locally, you of course can, but ultimately, your API should be made available as a Docker image.
+You can start Spicy.ai using either of these three methods:
 
-### Database startup
-From the repo root folder, run `docker-compose up -d` to start the PostgreSQL database needed for this example.  The database server will be exposed on port **5555**.  If this port is not available on your computer, feel free to change the port in the `docker-compose.yml` file.
+#### 1. Build and run locally (with Docker)
 
-In the test database, there is a single table called `properties` (with 5 sample rows), where each row represents a property or address.  There are three geography* fields and one field with an image URL pointing to an image on [Google Cloud Storage](https://cloud.google.com/storage/).
+This project requires Docker and docker-compose to be installed.
 
-* *If you are not familiar with [PostgreSQL](https://www.postgresql.org/) or [PostGIS](https://postgis.net/), you may need to read up beforehand.*
+From the project root directory:
 
-### Feature list
-(Note:  Not all of these must be implemented - select the ones you think you can do in **4 hours**)
+```bash
+PORT=3031 docker-compose up
+```
 
-* **Display:** API endpoint to display an image by property ID.  Given a *propertyId* as input, find the image URL from the database, download it from Google Cloud Storage and return the binary image as output in a format suitable for browser display.
-* **Find:** API endpoint to search properties within a geographical area.  Take a [GeoJSON](https://geojson.org/) object *geoJson* and a search radius *distance* (in meters) as inputs. Return all property IDs that are within *distance* meters of *geoJson*. Use the `geocode_geo` field of the `property` table for your query.
-* **Display Plus:** Add an option to the first API endpoint (**Display**) to also overlay the parcel and/or buildings (`parcel_geo` and `buildings_geo` fields in the database) on the image.  You can optionally add parameters for the color of each overlay, or use a default for each.
-* **Statistics:** API endpoint to calculate geographic data about all properties within a given distance from a reference property. Take *propertyId* and *distance* (in meters) as inputs. The API should return the following:
-  * parcel area (meters squared)
-  * buildings areas (array, meters squared) 
-  * buildings distances to center (array, meters squared).  Distance to center is the distance from the building to the `geocode_geo` field in the property table
-  * zone density (percentage).  Create a "zone" geography, which is a buffer of *distance* meters around the `geocode_geo` point.  Then, calculate the percentage of that zone geography which has buildings in it.
-* **Freestyle:**  Based on the other features, you should have a feel for the kind of features this API implements.  If you have other cool ideas of things to add that aren't listed here, we'd love to see them.
+_**Note**: This project requires a lot of memory to build. If you get a "Heap out of memory" error at build time, you
+may need to increase your max Docker memory from 2 GB to 4 GB in your Docker settings._
 
-## Submission instructions
+#### 2. Build and run locally (without Docker)
 
-Create a Docker image for your API and push it to a public image repository. Send instructions for how to run it.
+This project requires Node 12, Yarn 1, PostgreSQL 9 and PostGIS 2 to be installed.
 
-ZIP all of your code and email it to us, or create a fork of this git repo and share.
- 
-Also, somewhere include a list of what features you implemented, or if you did the freestyle, describe the features you came up with.  Add any comments or things you want the reviewer to consider when looking at your submission.  You don't need to be too detailed, as there will likely be a review done with you where you can explain what you've done.
+Once the database has been initialized and is running, start the API from the project root directory:
+
+```bash
+export PORT=3031
+export DATABASE_URL=postgres://postgres@localhost:5432/zesty
+yarn
+cd backend/ && yarn start
+```
+
+#### 3. Run a pre-built Docker image
+
+A prebuilt Docker image of the Spicy.ai API is available in this repo's
+[GitHub Packages](https://github.com/pascal-giguere/spicy.ai/packages).
+
+```bash
+# If not already done, login to GitHub with your username and a personal access token
+docker login docker.pkg.github.com --username <your_username>
+docker pull docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.0
+```
+
+Two environment variables must be set prior to running the API:
+
+```bash
+export DATABASE_URL=postgres://postgres@localhost:5432/zesty
+export PORT=3030
+```
+
+Once the database has been initialized and is running with the config specified in the env var above, start the API's
+Docker image:
+
+```bash
+docker run -e DATABASE_URL -e PORT -p 3031:3030 docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.0
+```
+
+## Usage
+
+Once the API and database are running, you'll be able to access Spicy.ai from your host machine on the port defined
+above:
+
+```bash
+curl http://localhost:3031/api
+# -> "Spicy.ai API"
+
+curl http://localhost:3031/
+# -> <front-end index.html>
+```
