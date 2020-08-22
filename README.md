@@ -1,5 +1,7 @@
 # Spicy.ai - Full Stack
 
+#### 🌶 Live demo: [https://spicy.pascalgiguere.dev]()
+
 ![Screenshot](screenshot.png)
 
 This project is a fork of the [Zesty.ai engineering test](https://github.com/zestyai/engineering-test).
