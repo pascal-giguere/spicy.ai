@@ -9,12 +9,16 @@ const DEFAULT_DISTANCE = 10000;
 
 const Container = styled.div`
   margin: -90px auto 0;
-  width: 540px;
+  max-width: 540px;
   background-color: white;
   border-radius: 30px;
   box-shadow: 0 15px 30px 0 #0002;
   padding: 35px 45px 25px;
   box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    width: 260px;
+  }
 `;
 
 const Button = styled.button`

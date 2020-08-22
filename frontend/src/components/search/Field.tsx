@@ -6,11 +6,19 @@ const Container = styled.div`
   width: 130px;
   margin: 0 15px;
 
-  &:first-child {
-    margin-left: 0;
+  @media (min-width: 768px) {
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
-  &:last-child {
-    margin-right: 0;
+
+  @media (max-width: 767px) {
+    display: block;
+    width: 180px;
+    margin: 0 auto 30px;
   }
 `;
 

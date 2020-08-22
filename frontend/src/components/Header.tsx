@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../images/logo.png';
 
+export enum Page {
+  index = 'index',
+  search = 'search',
+  favorites = 'favorites',
+}
+
+export enum BannerSize {
+  short = 'short',
+  tall = 'tall',
+}
+
 const Container = styled.div`
   padding-top: 20px;
   width: 100%;
@@ -31,6 +42,10 @@ const Items = styled.div`
   & a {
     text-decoration: none !important;
   }
+
+  @media (max-width: 767px) {
+    margin-top: 30px;
+  }
 `;
 
 const Item = styled.div<{ selected?: boolean }>`
@@ -45,23 +60,17 @@ const Item = styled.div<{ selected?: boolean }>`
   :hover {
     color: #ea5a46;
   }
-`;
 
-export enum BannerSize {
-  short = 'short',
-  tall = 'tall',
-}
+  @media (max-width: 767px) {
+    width: 120px;
+    font-size: 12px;
+  }
+`;
 
 type Props = {
   selectedPage?: Page;
   bannerSize?: BannerSize;
 };
-
-export enum Page {
-  index = 'index',
-  search = 'search',
-  favorites = 'favorites',
-}
 
 export const Header = (props: Props) => (
   <Container>
