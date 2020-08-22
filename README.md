@@ -75,7 +75,7 @@ A prebuilt Docker image of the Spicy.ai API is available in this repo's
 ```bash
 # If not already done, login to GitHub with your username and a personal access token
 docker login docker.pkg.github.com --username <your_username>
-docker pull docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.0
+docker pull docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.1
 ```
 
 Two environment variables must be set prior to running the API:
@@ -89,7 +89,7 @@ Once the database has been initialized and is running with the config specified 
 Docker image:
 
 ```bash
-docker run -e DATABASE_URL -e PORT -p 3031:3030 docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.0
+docker run -e DATABASE_URL -e PORT -p 3031:3030 docker.pkg.github.com/pascal-giguere/spicy.ai/spicy-ai-fullstack:2.0.1
 ```
 
 ## Usage
