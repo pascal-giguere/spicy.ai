@@ -87,9 +87,11 @@ Once the API and database are running, you'll be able to access Spicy.ai from yo
 above:
 
 ```bash
+# Front-end
+curl http://localhost:3031/
+# -> <index.html>
+
+# Back-end
 curl http://localhost:3031/api
 # -> "Spicy.ai API"
-
-curl http://localhost:3031/
-# -> <front-end index.html>
 ```

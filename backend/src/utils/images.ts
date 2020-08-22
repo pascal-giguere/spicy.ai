@@ -17,7 +17,7 @@ export function drawOverlay(
   polygonPoints: { x: number; y: number }[],
   color: string
 ): void {
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 6;
   ctx.strokeStyle = color;
   ctx.fillStyle = `${color}50`;
   ctx.beginPath();
